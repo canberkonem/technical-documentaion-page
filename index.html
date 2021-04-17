@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Technical Document Page</title>
+</head>
+<body>
+    <nav id="navbar">
+        <header>Pushing commits to a remote repository</header>
+        <div class="sections">
+            <p><a class="nav-link" href="#git_pushing">Git Pushing</a></p>
+            <p><a class="nav-link" href="#renaming_branches">Renaming Branches</a></ğ>
+            <p><a class="nav-link" href="#dealing_with_non-fast-forward_errors">Dealing with non-fast-forward errors</a></p>
+            <p><a class="nav-link" href="#pushing_tags">Pushing Tags</a></p>
+            <p><a class="nav-link" href="#deleting_remote_branch_or_tag">Deleting Remote Branch or Tag</a></p>
+            <p><a class="nav-link" href="#remotes_and_forks">Remotes and Forks</a></p>
+            <p><a class="nav-link" href="#further_reading">Further Reading</a></p>
+            <p><a class="nav-link" href="#Reference">Reference</a></p>
+        </ul>
+    </nav>
+    <main id="main-doc">
+        <section class="main-section" id="git_pushing">
+            <header>Git Pushing</header>
+            <p>Use <code>git push</code> to push commits made on your local branch to a remote repository.</p>
+            <p>The git push command takes two arguments:</p>
+            <ul>
+                <li>A remote name, for example, <code>origin</code></li>
+                <li>A branch name, for example, <code>main</code></li>
+            </ul>
+            <p>For example:</p>
+            <p><code class="big-code">it push  <i>&#60REMOTENAME> &#60BRANCHNAME></i></code></p>
+            <p>As an example, you usually run <code>git push origin main</code> to push your local changes to your online repository</p>
+        </section>
+        <section class="main-section" id="renaming_branches">
+            <header>Renaming Branches</header>
+            <p>To rename a branch, you'd use the same git push command, but you would add one more argument: the name of the new branch. For example:</p>
+            <p><code class="big-code">it push  <i>&#60REMOTENAME>&#60LOCALBRANCHNAME>:&#60BRANCHNAME></i></code></p>
+            <p>This pushes the <code>LOCALBRANCHNAME</code> to your <code>REMOTENAME</code>, but it is renamed to <code>REMOTEBRANCHNAME</code>.</p>
+        </section>
+        <section class="main-section" id="dealing_with_non-fast-forward_errors">
+            <header>Dealing with non-fast-forward errors</header>
+            <p>If your local copy of a repository is out of sync with, or "behind," the upstream repository you're pushing to, you'll get a message saying <code>non-fast-forward updates were rejected</code>. This means that you must retrieve, or "fetch," the upstream changes, before you are able to push your local changes.</p>
+            <p>For more information on this error, see "<a class="link-inside" href="https://docs.github.com/en/github/getting-started-with-github/dealing-with-non-fast-forward-errors">Dealing with "non-fast-forward" errors</a>".</p>
+        </section>
+        <section class="main-section" id="pushing_tags">
+            <header>Pushing Tags</header>
+            <p>By default, and without additional parameters, <code>git push</code> sends all matching branches that have the same names as remote branches.</p>
+            <p>To push a single tag, you can issue the same command as pushing a branch:</p>
+            <p><code class="big-code">git push <i>&#60REMOTENAME> &#60TAGNAME></i></code></p>
+            <p>To push all your tags, you can type the command:</p>
+            <p><code class="big-code">git push <i>&#60REMOTENAME> --tags</i></code></p>
+        </section>
+        <section class="main-section" id="deleting_remote_branch_or_tag">
+            <header>Deleting Remote Branch or Tag</header>
+            <p>The syntax to delete a branch is a bit arcane at first glance:</p>
+            <p><code class="big-code">git push <i>&#60REMOTENAME> :&#60BRANCHNAME></i></code></p>
+            <p>Note that there is a space before the colon. The command resembles the same steps you'd take to rename a branch. However, here, you're telling Git to push <i>nothing</i> into <code>BRANCHNAME</code> on <code>REMOTENAME</code> Because of this, <code>git push</code> deletes the branch on the remote repositor</p>
+        </section>
+        <section class="main-section" id="remotes_and_forks">
+            <header>Remotes and Forks</header>
+            <p>You might already know that you can "fork" repositories on GitHub.</p>
+            <p>When you clone a repository you own, you provide it with a remote URL that tells Git where to fetch and push updates. If you want to collaborate with the original repository, you'd add a new remote URL, typically called <code>upstream</code>, to your local Git clone:</p>
+            <p><code class="big-code">git remote add upstream <i>&#60THEIR_REMOTE_URL></i></code></p>
+            <p>Now, you can fetch updates and branches from <i>their</i> fork:</p>
+            <p>
+                <code class="big-code">
+                git fetch upstream<br>
+                # Grab the upstream remote's branches<br>
+                > remote: Counting objects: 75, done.<br>
+                > remote: Compressing objects: 100% (53/53), done.<br>
+                > remote: Total 62 (delta 27), reused 44 (delta 9)<br>
+                > Unpacking objects: 100% (62/62), done.<br>
+                > From https://github.com/octocat/repo<br>
+                >  * [new branch]      main     -> upstream/main
+                </code>
+            </p>
+            <p>When you're done making local changes, you can push your local branch to GitHub and initiate a pull request.</p>
+            <p>For more information on working with forks, see "Syncing a fork".</p>
+        </section>
+        <section class="main-section" id="further_reading">
+            <header>Further Reading</header>
+            <ul>
+                <li>The "Remotes" chapter from the "Pro Git" book</li>
+                <li><code>git remote</code> man page</li>
+                <li>"Git cheatsheet"</li>
+                <li>"Git workflows"</li>
+                <li>"Git Handbook"</li>
+            </ul>
+        </section>
+        <section class="main-section" id="Reference">
+            <header>Reference</header>
+            <ul>
+                <li>All the documentation in this page is taken from GITHUB.</li>
+    </main>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body> 
+</html>
